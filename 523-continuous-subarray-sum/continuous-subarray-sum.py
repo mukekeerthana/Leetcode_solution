@@ -1,16 +1,19 @@
 class Solution:
     def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-        rem = {0: -1}
-        run_sum = 0
+        r_map = {0: -1}
+        pref = 0
         for i, num in enumerate(nums):
-            run_sum += num
-            r = run_sum % k
-            if r in rem:
-                if i - rem[r] >= 2:
+            pref += num
+            rem = pref % k
+            if rem in r_map:
+                ind = i - r_map[rem]
+                if ind >= 2:
                     return True
             else:
-                rem[r] = i
+                r_map[rem] = i
         return False
+                
+            
         
 
         
